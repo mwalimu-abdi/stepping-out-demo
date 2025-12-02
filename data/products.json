@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "White Airforce",
+    "price": 2600,
+    "image": "data/images/force.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Shirt",
+    "price": 25,
+    "image": "data/images/shirt.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Glass",
+    "price": 10,
+    "image": "data/images/glass.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Smartphone",
+    "price": 600,
+    "image": "data/images/smartphone.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Headphones",
+    "price": 120,
+    "image": "data/images/headphones.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Smartwatch",
+    "price": 150,
+    "image": "data/images/smartwatch.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Sneakers",
+    "price": 70,
+    "image": "data/images/sneakers.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Backpack",
+    "price": 45,
+    "image": "data/images/backpack.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Camera",
+    "price": 500,
+    "image": "data/images/camera.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Perfume",
+    "price": 40,
+    "image": "data/images/perfume.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Tablet",
+    "price": 300,
+    "image": "data/images/tablet.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Shoes",
+    "price": 60,
+    "image": "data/images/shoes.jpg"
+  },
+  {
+    "id": 13,
+    "name": "Wallet",
+    "price": 20,
+    "image": "data/images/wallet.jpg"
+  },
+  {
+    "id": 14,
+    "name": "Watch",
+    "price": 90,
+    "image": "data/images/watch.jpg"
+  },
+  {
+    "id": 15,
+    "name": "Earbuds",
+    "price": 35,
+    "image": "data/images/earbuds.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Jeans",
+    "price": 40,
+    "image": "data/images/jeans.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Cap",
+    "price": 15,
+    "image": "data/images/cap.jpg"
+  },
+  {
+    "id": 18,
+    "name": "T-Shirt",
+    "price": 18,
+    "image": "data/images/tshirt.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Mouse",
+    "price": 25,
+    "image": "data/images/mouse.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Keyboard",
+    "price": 45,
+    "image": "data/images/keyboard.jpg"
+  }
+]
