@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Mwalimu Footwear | Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+      color: #333;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      transition: opacity 0.5s ease-in-out;
+      opacity: 0;
+    }
+    img.loaded {
+      opacity: 1;
+    }
+
+    /* Navbar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      color: white;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+    }
+    header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-left: 10px;
+    }
+    header h1 {
+      font-size: 1.4rem;
+      color: #ff914d;
+      margin-left: 10px;
+    }
+
+    /* Hamburger menu */
+    .menu-icon {
+      width: 27px;
+      height: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+    .menu-icon span {
+      height: 4px;
+      background: white;
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* Dropdown Menu */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      background: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      min-width: 220px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .dropdown a, .dropdown p {
+      display: block;
+      padding: 10px 15px;
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .dropdown a:hover {
+      background: #ff914d;
+    }
+    .menu-container.active .dropdown {
+      display: block;
+    }
+
+    /* Slider section */
+    .slider {
+      position: relative;
+      width: 100%;
+      max-height: 450px;
+      overflow: hidden;
+    }
+    .slides {
+      display: flex;
+      width: 500%;
+      animation: slide 20s infinite;
+    }
+    .slides img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    @keyframes slide {
+      0% { margin-left: 0; }
+      20% { margin-left: 0; }
+      25% { margin-left: -100%; }
+      45% { margin-left: -100%; }
+      50% { margin-left: -200%; }
+      70% { margin-left: -200%; }
+      75% { margin-left: -300%; }
+      95% { margin-left: -300%; }
+      100% { margin-left: -400%; }
+    }
+
+    /* Hero text overlay */
+    .hero-text {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 20px 30px;
+      border-radius: 10px;
+    }
+    .hero-text h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .hero-text button {
+      background: #ff914d;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-bottom: 100px;
+    }
+    .hero-text button:hover {
+      background: #ff751a;
+    }
+
+    /* Contact Banner */
+    .contact-banner {
+      background: #ff914d;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-weight: 500;
+      height: 27px;
+    }
+    .contact-banner a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      background: black;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9rem;
+      margin-top: 0px;
+    }
+    .footer p, .footer h2, .footer h3, .footer h4 {
+      color: #ddd;
+      margin: 5px 0;
+    }
+    .footer a {
+      color: #00bfff;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .social-icons a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 1.5em;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: #00bfff;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.2rem;
+      }
+      .dropdown {
+        min-width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="menu-container" id="menu">
+        <div class="menu-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="dropdown" id="dropdown">
+          <p>📞 Call: <a href="tel:+xxxxxx">0712345678</a></p>
+          <p>💬 WhatsApp: <a href="https://wa.me/254712345678" target="_blank">Chat Now</a></p>
+          <a href="products.html">🛍️ Products</a>
+          <p>📍 Location: Online</p>
+          <a href="cart.html">🛒 Cart</a>
+          <a href="about.html">ℹ️ About</a>
+        </div>
+      </div>
+      <img src="data/images/logo.jpeg" alt="Logo" width="40" height="40" loading="lazy">
+      <h1>STEPPING OUT DEMO</h1>
+    </div>
+  </header>
+
+  <!-- Slider Section -->
+  <section class="slider">
+    <div class="slides">
+      <img src="data/images/j4red.jpeg" alt="Red Jordan" width="1200" height="400" loading="lazy">
+      <img src="data/images/bg1.jpeg" alt="Black Airmax" width="1200" height="400" loading="lazy">
+      <img src="data/images/bg2.jpeg" alt="Naked Wolfe" width="1200" height="400" loading="lazy">
+      <img src="data/images/bg3.jpeg" alt="White Samba" width="1200" height="400" loading="lazy">
+      <img src="data/images/bg4.jpeg" alt="Blue Jordan" width="1200" height="400" loading="lazy">
+    </div>
+    <div class="hero-text">
+      <h2>Step Up Your Style</h2>
+      <p>Trendy sneakers, Airmax & Jordans at unbeatable prices</p>
+      <button onclick="window.location.href='products.html'">Shop Now</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h2 class="footer-logo">STEPPING OUT DEMO</h2>
+      <h3>Contact Details</h3>
+      <p>Nairobi, Kenya,<br>Official email: mail.STEPPING OUT DEMO.co.ke</p>
+      <p>Phone: <a href="tel:0728214134">+254 728214134</a></p>
+      <div class="footer-links">
+        <a href="#">Smart Sneakers</a> |
+        <a href="#">Official Boots</a> |
+        <a href="#">Fast Delivery</a>
+      </div>
+      <h4>We do fast deliveries and accept payments on delivery</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="https://wa.me/254 728214134" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="about.html">ℹ️ </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("active");
+    }
+
+    window.onclick = function(event) {
+      const menu = document.getElementById("menu");
+      if (!menu.contains(event.target)) {
+        menu.classList.remove("active");
+      }
+    }
+
+    // Lazy load images smoothly
+    document.addEventListener("DOMContentLoaded", function() {
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      images.forEach(img => {
+        img.onload = () => img.classList.add('loaded');
+        if (img.complete) img.classList.add('loaded');
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

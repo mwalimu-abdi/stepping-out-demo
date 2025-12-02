@@ -1,0 +1,152 @@
+<section id="order-section" style="
+  max-width: 95%;
+  margin: 30px auto;
+  background: rgba(255,255,255,0.96);
+  padding: 25px 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+">
+  <h2 style="text-align: center; color: #0b8457; font-size: 26px;">🥿 STEPPING OUT DEMO Order Form</h2>
+  <p style="text-align: center; color: #666; font-size: 18px;">Select shoe sizes and complete your details below to place your order.</p>
+
+  <form id="orderForm" action="https://formspree.io/f/mdkpqepq" method="POST" style="margin-top: 25px; position: relative; z-index: 2;">
+
+    <!-- Cart Items -->
+    <div id="cart-items" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; text-align: center;"></div>
+
+    <hr style="margin: 30px 0; border: 1px solid #ccc;">
+
+    <!-- Total Price -->
+    <label for="total" style="display:block; color:#444; font-size:20px;">💰 Total Price</label>
+    <input type="text" id="total" name="total_price" readonly style="width:100%; padding:25px; border:1px solid #ccc; border-radius:18px; font-size:20px; background:#f9f9f9; margin-bottom:30px;">
+
+    <label for="phone" style="display:block; color:#444; font-size:20px;">📱 Phone Number</label>
+    <input type="tel" id="phone" name="phone" placeholder="e.g. 0712345678" required style="width:100%; padding:25px; border:1px solid #ccc; border-radius:18px; font-size:20px; margin-bottom:30px;">
+
+    <label for="location" style="display:block; color:#444; font-size:20px;">📍 Delivery Location</label>
+    <input type="text" id="location" name="location" placeholder="Enter your delivery location" required style="width:100%; padding:25px; border:1px solid #ccc; border-radius:18px; font-size:20px; margin-bottom:30px;">
+
+    <label for="payment" style="display:block; color:#444; font-size:20px;">💳 Payment Type</label>
+    <select id="payment" name="payment_type" required style="width:100%; padding:25px; border:1px solid #ccc; border-radius:18px; font-size:20px; background:#fff; margin-bottom:30px; box-sizing:border-box;">
+      <option value="" disabled selected>Select Payment Type</option>
+      <option value="Payment on Delivery">Payment on Delivery</option>
+      <option value="Payment Before Delivery">Payment Before Delivery</option>
+    </select>
+
+    <label for="message" style="display:block; color:#444; font-size:20px;">📝 Additional Notes</label>
+    <textarea id="message" name="message" placeholder="Any special requests?" rows="4" style="width:100%; padding:25px; border:1px solid #ccc; border-radius:18px; font-size:20px; margin-bottom:35px;"></textarea>
+
+    <button type="submit" style="margin-top:20px; width:100%; background:#0b8457; color:#fff; padding:28px; border:none; border-radius:18px; font-size:22px; cursor:pointer;">Submit Order ✅</button>
+
+    <!-- Back to Cart Button -->
+    <button type="button" id="backToCart" onclick="goBackToCart()" style="margin-top:18px; width:100%; background:#007bff; color:#fff; padding:22px; border:none; border-radius:18px; font-size:20px; cursor:pointer;">⬅ Back to Cart</button>
+  </form>
+
+  <p id="form-message" style="text-align:center; font-weight:bold; margin-top:25px; font-size:18px;"></p>
+
+  <!-- Background Logo -->
+  <div style="
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    top:480px;
+    background:url('data/images/logo.png') no-repeat center;
+    background-size: contain;
+    opacity: 0.15;
+    z-index: 1;
+  "></div>
+</section>
+
+<div class="contact-banner" style="text-align:center; margin:35px 0; font-size:18px;">
+  📞 Call: <a href="tel:+254712345678" style="color:#0b8457;">+254712345678</a> &nbsp; | &nbsp;
+  <img src="data/images/wasap.jpg" alt="WhatsApp" style="width:24px; vertical-align:middle; border-radius: 50%;"> 
+  <a href="https://wa.me/254712345678" target="_blank" style="color:#0b8457;">Chat on WhatsApp</a>
+</div>
+
+<script>
+  const cartContainer = document.getElementById('cart-items');
+  const form = document.getElementById('orderForm');
+  const message = document.getElementById('form-message');
+  const totalInput = document.getElementById('total');
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function renderCart() {
+    cartContainer.innerHTML = '';
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p style='color:red; text-align:center;'>🛒 Your cart is empty.</p>";
+      totalInput.value = '';
+      return;
+    }
+
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price * item.quantity;
+
+      const div = document.createElement('div');
+      div.style.background = '#f9f9f9';
+      div.style.border = '1px solid #ddd';
+      div.style.borderRadius = '12px';
+      div.style.padding = '10px';
+      div.style.fontSize = '17px';
+      div.style.width = '280px';
+      div.style.maxWidth = '100%';
+      div.style.minHeight = '380px';
+
+      let sizes = '';
+      for (let i = 0; i < item.quantity; i++) {
+        sizes += `
+          <select name="size_${index}_${i}" required style="margin-top:8px; width:${item.quantity > 1 ? '48%' : '100%'}; padding:16px; border:1px solid #ccc; border-radius:12px; font-size:17px;">
+            <option value="" disabled selected>Size</option>
+            ${Array.from({length: 15}, (_, s) => `<option value="${s + 32}">${s + 32}</option>`).join('')}
+          </select>
+        `;
+      }
+
+      div.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" style="width:100%; height:240px; object-fit:cover; border-radius:12px;">
+        <p style="margin:10px 0; font-weight:bold;">${item.name}</p>
+        <p style="margin:5px 0;">Quantity: ${item.quantity}</p>
+        <div style="display:flex; flex-wrap:wrap; gap:6px; justify-content:center;">${sizes}</div>
+        <input type="hidden" name="product_${index}" value="${item.name}">
+        <input type="hidden" name="quantity_${index}" value="${item.quantity}">
+      `;
+      cartContainer.appendChild(div);
+    });
+
+    totalInput.value = `KSh ${total.toLocaleString()}`;
+  }
+
+  renderCart();
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    message.style.color = '#0b8457';
+    message.textContent = "Submitting your order...";
+
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      message.style.color = '#0b8457';
+      message.textContent = "✅ Thank you! Your order has been received. Delivery cost may apply depending on your location.";
+      form.reset();
+    } else {
+      message.style.color = 'red';
+      message.textContent = "❌ Something went wrong. Please try again later.";
+    }
+  });
+
+  // Back to Cart function
+  function goBackToCart() {
+    window.location.href = "cart.html"; // change this to your cart page
+  }
+</script>

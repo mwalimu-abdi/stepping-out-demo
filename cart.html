@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart - MyShop</title>
+
+  <!-- Link to your stylesheet -->
+  <link rel="stylesheet" href="data/css/style.css" />
+
+  <style>
+    /* Simple fallback styling */
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav {
+      background: #333;
+      color: white;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .cart-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .cart-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .cart-section {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-section h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .cart-items {
+      margin-top: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 0;
+    }
+
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-right: 15px;
+    }
+
+    .cart-item h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .cart-item p {
+      margin: 0;
+      color: gray;
+    }
+
+    .cart-total {
+      text-align: right;
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    /* Buttons styling */
+    .cart-actions {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .clear-cart,
+    .order-btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s;
+      color: white;
+    }
+
+    .clear-cart {
+      background: crimson;
+    }
+
+    .clear-cart:hover {
+      background: darkred;
+    }
+
+    .order-btn {
+      background: #28a745;
+      display: inline-block;
+    }
+
+    .order-btn:hover {
+      background: #218838;
+    }
+
+    button.remove-btn {
+      background: #ff4444;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button.remove-btn:hover {
+      background: #e63939;
+    }
+
+  .home-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.home-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  border-radius: 50%; /* optional for round icons */
+}
+
+.home-link:hover {
+  color: #ff6600;
+}
+ .cart-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.cart-link:hover {
+  color: #007bff;
+}
+
+.cart-icon {
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+.logo{
+  font-family: Calibri;
+  font-style: oblique;
+}
+.cart-link:hover .cart-icon {
+  transform: scale(1.15);
+}
+  </style>
+</head>
+
+<body>
+  <!-- 🧭 Navigation -->
+  <nav>
+    <a href="index.html" class="home-link">
+   <img src="data/images/home.jpg" alt="Home" class="home-icon">
+  Home>
+    <a href="products.html">Products</a>
+      <div class="cart-wrapper">
+       
+      </div>
+    </a>
+  </nav>
+
+  <!-- 🛍️ Cart Section -->
+  <section class="cart-section">
+    <h2>Your Shopping Cart</h2>
+    <div id="cart-items" class="cart-items"></div>
+    <h3 id="cart-total" class="cart-total">Total: Ksh 0</h3>
+
+    <div class="cart-actions">
+      <button id="clear-cart" class="clear-cart">Clear Cart</button>
+      <a href="orderform.html" class="order-btn">Order Now</a>
+    </div>
+  </section>
+
+  <!-- 📜 Scripts -->
+  <script src="data/js/script.js"></script>
+  <script>
+    // Load and display cart
+    function loadCart() {
+      const cartContainer = document.getElementById("cart-items");
+      const totalDisplay = document.getElementById("cart-total");
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      cartContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
+        totalDisplay.textContent = "Total: Ksh 0";
+        return;
+      }
+
+      cart.forEach(item => {
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+
+        div.innerHTML = `
+          <div style="display:flex;align-items:center;">
+            <img src="${item.image}" alt="${item.name}">
+            <div>
+              <h4>${item.name}</h4>
+              <p>Price: Ksh ${item.price}</p>
+              <p>Quantity: ${item.quantity}</p>
+            </div>
+          </div>
+          <button class="remove-btn" data-id="${item.id}">Remove</button>
+        `;
+
+        cartContainer.appendChild(div);
+        total += item.price * item.quantity;
+      });
+
+      totalDisplay.textContent = "Total: Ksh " + total.toLocaleString();
+
+      // Remove item
+      document.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", e => {
+          const id = e.target.getAttribute("data-id");
+          cart = cart.filter(item => item.id != id);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          loadCart();
+        });
+      });
+    }
+
+    // Initialize
+    document.addEventListener("DOMContentLoaded", loadCart);
+
+    // Clear cart
+    document.getElementById("clear-cart").addEventListener("click", () => {
+      localStorage.removeItem("cart");
+      loadCart();
+    });
+  </script>
+</body>
+</html>
